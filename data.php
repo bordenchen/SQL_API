@@ -5,16 +5,16 @@ if (isset($_GET["key"])){
 	$password = "k39b";
 	//decrypt 
 	$c = base64_decode($ciphertext);
-	$ivlen = openssl_cipher_iv_length($cipher="AES-256-OFB");
+	$ivlen = openssl_cipher_iv_length($cipher="xxxxxxx");
 	$iv = substr($c, 0, $ivlen);
 	$hmac = substr($c, $ivlen, $sha2len=0);
 	$ciphertext_raw = substr($c, $ivlen+$sha2len);
 	$original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $password, $options=OPENSSL_RAW_DATA, $iv);
-	$calcmac = hash_hmac('BF-CBC', $ciphertext_raw, $password, $as_binary=true);
+	$calcmac = hash_hmac('xxxx', $ciphertext_raw, $password, $as_binary=true);
 
 	$user_info =  explode("=",$original_plaintext);
-	$serverName = "DESKTOP-LHT5MBF"; //serverName\instanceName
-	$connectionInfo = array( "Database"=>"ApiCtrl", "UID"=>"JSClient", "PWD"=>"jsclient");
+	$serverName = "xxxxxxx"; //serverName\instanceName
+	$connectionInfo = array( "Database"=>"xxxxx", "UID"=>"xxxxxx", "PWD"=>"xxxxxxxx");
 	$conn = sqlsrv_connect( $serverName, $connectionInfo);
 	if( $conn ) {
 		$sql_usr = "SELECT * FROM [dbo].[CtrlUser] WHERE [J_Admin]='$user_info[0]'";
@@ -61,7 +61,7 @@ if (isset($_GET["key"])){
 		 die();
 	}
 	if(isset($station_table)){
-		$connectionInfo = array( "Database"=>"ApiDC", "UID"=>"JSClient", "PWD"=>"jsclient");
+		$connectionInfo = array( "Database"=>"xxxxxx", "UID"=>"xxxxx", "PWD"=>"xxxxxxxxx");
 		$conn = sqlsrv_connect( $serverName, $connectionInfo);
 		if( $conn ) {
 			if(isset($_GET['interval'])){
